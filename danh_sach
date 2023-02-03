@@ -1,0 +1,129 @@
+#include <stdio.h>
+#include <math.h>
+#include <string.h>
+struct danh_sach
+{
+	char hten[100],cbo[100],msd[100];
+	int nvd;
+	
+}ds[100];
+    
+void Nhap ( int n  , int i )
+{
+    for ( i=0 ; i<n ; i++ )
+	{
+        printf("Ho va ten : ");
+        fflush(stdin);
+        gets(ds[i].hten);
+        printf("Ma so dang : ");
+        fflush(stdin);
+        gets(ds[i].msd);
+        printf("Chi bo :");
+        fflush(stdin);
+        gets(ds[i].cbo);
+        printf("Nam vao dang : ");
+        scanf("%d",&ds[i].nvd);
+        
+        printf ("\n");
+    }
+}
+
+void Xuat ( int n , int i )
+{
+	printf ("__Danh sach theo nam vao dang __ \n\n");
+	
+    for ( i=0 ; i<n ; i++ )
+	{
+        printf("Ho va ten : ");
+        puts(ds[i].hten);
+        printf("Ma so dang : ");
+        puts(ds[i].msd);
+        printf("Chi bo :");
+        puts(ds[i].cbo);
+        
+        printf("Nam vao dang : %d \n\n",ds[i].nvd);
+    }
+}
+
+void sapxep ( int n , int i , int j )
+{
+    for ( i=0 ; i<n-1 ; i++ )
+	{
+        for( j=i+1 ; j<n ; j++ )
+		{
+            if( ds[i].nvd > ds[j].nvd )
+			{
+                danh_sach dsM = ds[i];
+                ds[i] = ds[j];
+                ds[j] = dsM;
+            }
+        }
+    }
+}
+
+void kiemtra1 ( char a[100] , int n, int i )
+{	
+	printf ("Nhap ten dang vien : ");
+    fflush(stdin);
+    gets(a);
+    printf ("\n");
+    
+	for ( i=0 ; i<n ; i++ )
+	{
+		if ( strcmp(a,ds[i].hten)==0 )
+		{
+			printf("Ho va ten : ");
+        	puts(ds[i].hten);
+       		printf("Ma so dang : ");
+        	puts(ds[i].msd);
+        	printf("Chi bo :");
+       		puts(ds[i].cbo);
+        
+       		printf("Nam vao dang : %d \n\n",ds[i].nvd);
+		}
+	}
+}
+
+void kiemtra2 ( int k , int n, int i , int d )
+{
+	printf ("Nhap nam vao dang : ");
+    scanf ("%d",&k);
+    printf ("\n");
+    
+	for ( i=0 ; i<n ; i++ )
+	{
+		if ( ds[i].nvd==k )	{ d+=1; }
+	}
+	
+	printf ("So dang vien vao dang nam %d la %d \n\n",k,d);
+	
+	for ( i=0 ; i<n ; i++ )
+	{
+		if ( ds[i].nvd==k )
+		{
+			printf("Ho va ten : ");
+        	puts(ds[i].hten);
+       		printf("Ma so dang : ");
+        	puts(ds[i].msd);
+        	printf("Chi bo :");
+       		puts(ds[i].cbo);
+       		printf ("\n\n");
+		}
+	}
+}
+
+int main()
+{
+    int n,i,j,k,d=0;
+    char a[100];
+	 
+    printf("Nhap so dang vien : ");
+    scanf("%d",&n);
+    printf ("\n");
+    
+    Nhap(n,i);
+    sapxep(n,i,j);
+    Xuat(n,i);
+	kiemtra2(k,n,i,d);
+    kiemtra1(a,n,i);
+}
